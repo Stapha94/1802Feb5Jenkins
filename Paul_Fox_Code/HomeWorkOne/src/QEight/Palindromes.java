@@ -56,7 +56,6 @@ public class Palindromes {
             if (normalString.equalsIgnoreCase(reverseString)){
 
                 palindromesList.add(initialList.get(i));
-                initialList.remove(i);
 
             }
 
