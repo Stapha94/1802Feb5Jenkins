@@ -2,31 +2,26 @@ package QEighteen;
 
 public class AbstractMain extends AbstractClass{
 
-    public static void main(String[] args) {
-
-
-
-    }
-
     @Override
     public boolean checkUppercase(String s){
 
-
-        return false;
+        boolean hasUppercase = !s.equals(s.toLowerCase());
+        return hasUppercase;
     }
 
     @Override
     public String lowerToUpper(String s){
 
-
+        s = s.toUpperCase();
         return s;
     }
 
     @Override
     public int stringToInt(String s){
 
-
-        return 0;
+        int answer = Integer.parseInt(s);
+        answer = answer + 10;
+        return answer;
     }
 
 }
