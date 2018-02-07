@@ -21,6 +21,7 @@ public class FileReading {
 
                 String[] data = line.split(":");
                 System.out.println("Name: " + data[0] + " " + data[1] + "\nAge " + data[2] + " Years\nState: " + data[3] + " State");
+                System.out.println();
 
             }
 
