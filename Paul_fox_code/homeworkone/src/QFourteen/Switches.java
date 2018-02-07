@@ -1,10 +1,10 @@
-package QThirteen;
+package QFourteen;
 
-public class Triangle {
+public class Switches {
 
     public static void main(String[] args) {
 
-
+        
 
     }
 
