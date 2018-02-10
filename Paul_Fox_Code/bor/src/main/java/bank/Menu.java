@@ -26,32 +26,32 @@ public class Menu {
 		
 		switch (action) {
 
-		case "login": {
+			case "login": {
 
-			do {
-				System.out.print("email address > ");
-				selection = scanner.nextLine();
-			} while (!validEmail(selection));
+				do {
+					System.out.print("email address > ");
+					selection = scanner.nextLine();
+				} while (!validEmail(selection));
 
-			break;
-		}
+				break;
+			}
 
-		case "password": {
+			case "password": {
 
-			do {
-				System.out.print("password > ");
-				selection = scanner.nextLine();
-			} while (!validPassword(selection));
+				do {
+					System.out.print("password > ");
+					selection = scanner.nextLine();
+				} while (!validPassword(selection));
 
-			//Arrays.fill(password, ' ');
-			//Main.logger.info(email + " has logged in.");
+				//Arrays.fill(password, ' ');
+				//Main.logger.info(email + " has logged in.");
 
-			break;
-		}
+				break;
+			}
 
-			case "incorrect": {
+			case "create answer": {
 
-				System.out.print("\n\tUser / Password combination does not exist, create account? (y/n) > \n");
+				System.out.print("Answer > ");
 				selection = scanner.nextLine();
 				break;
 
@@ -68,25 +68,30 @@ public class Menu {
 		
 		switch(message) {
 
-		case "welcome": {
-			System.out.println("Welcome to the Bank of Revature, LLC.\n");
-			System.out.println("\tPlease login or register.\n");
-			break;
-		}
+			case "welcome": {
+				System.out.println("Welcome to the Bank of Revature, LLC.\n");
+				System.out.println("\tPlease login or register.\n");
+				break;
+			}
 
-		case "try again": {
-			System.out.println("\n\tEnter\n");
-			break;
-		}
+			case "create": {
+				System.out.print("\n\tUser / Password combination does not exist, create account? (y/n)\n\n");
+				break;
+			}
 
-		case "landing": {
-			System.out.println("\n" +
-					"\t(1) make a transaction\n" +
-					"\t(2) view accounts\n" +
-					"\t(3) edit profile\n" +
-					"\t(4) exit\n");
-			break;
-		}
+			case "incorrect": {
+				System.out.print("\n\tUser / Password combination does not exist\n\n");
+				break;
+			}
+
+			case "landing": {
+				System.out.println("\n" +
+						"\t(1) make a transaction\n" +
+						"\t(2) view accounts\n" +
+						"\t(3) edit profile\n" +
+						"\t(4) exit\n");
+				break;
+			}
 
 		}
 			

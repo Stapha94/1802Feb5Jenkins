@@ -26,7 +26,7 @@ public class User implements Serializable {
 
 	String name;
 	String email;
-	char[] hash;
+	String hash;
 	char[] salt;
 
 	
@@ -44,11 +44,11 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public char[] getHash() {
-		return hash;
-	}
+//	public char[] getHash() {
+//		return hash;
+//	}
 
-	public void setPassword(char[] password) {
+	public void setPassword(String password) {
 		/*
 		byte[] salt = new byte[16];
 		SecureRandom random = new SecureRandom();
@@ -66,7 +66,7 @@ public class User implements Serializable {
 	}
 
 	
-	public static boolean authenticate(User fileUser, char[] password) throws IOException {
+	public static boolean authenticate(User fileUser, String password) throws IOException {
 		
 		if (!fileUser.hash.equals(password)){
 
@@ -88,28 +88,38 @@ public class User implements Serializable {
 
 			if (!this.exists(tempEmail)) {
 				tempPassword = menu.prompt(("password"));
-				String createAccout = menu.prompt("incorrect");
+				menu.printMessage("create");
+				String createAccout = menu.prompt("create answer");
 
 				if(createAccout.equalsIgnoreCase("y")) {
 					setEmail(tempEmail);
-					setPassword(tempPassword.toCharArray());
+					setPassword(tempPassword);
 					write(this.email);
+					break;
 				}
 
-				else
-					menu.printMessage("try again");
+				else {
+					continue;
+				}
 
-				continue;
+
 			}
 			else {
 				fileUser = read(tempEmail);
 				tempPassword = menu.prompt(("password"));
-				//authenticate(fileUser, this.hash);
+				boolean authenticated = authenticate(fileUser, tempPassword);
+				if(authenticated){
+
+					break;
+
+				}
+				else
+					menu.printMessage("incorrect");
 			}
 
 
-			setPassword(menu.prompt("password").toCharArray());
-		} while (!User.authenticate(fileUser, tempPassword.toCharArray()));
+			//setPassword(menu.prompt("password").toCharArray());
+		} while (true);
 
 		menu.printMessage("landing");
 		
