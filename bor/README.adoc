@@ -1,0 +1,173 @@
+= bor: the Bank of Revature
+
+*Banking App Pt.1*
+
+Leveraging Java 8, create an application that simulates simple banking transactions.
+
+Requirements:
+
+  - Build the application using Java 8
+  - All interaction with the user should be done through the console using the Scanner class
+  - Customers of the bank should be able to register with a username and password, and apply to open an account.
+      * Customers should be able to apply for joint accounts
+  - Once the account is open, customers should be able to withdraw, deposit, and transfer funds between accounts
+      * All basic validation should be done, such as trying to input negative amounts, overdrawing from accounts etc.
+  - Employees of the bank should be able to view all of their customers information
+      * Account information
+      * Account balances
+      * Personal information
+  - Employees should be able to approve/deny open applications for accounts
+  - Bank admins should be able to view and edit all accounts
+      * Approving/denying accounts
+      * withdrawing, depositing, transferring from all accounts
+      * canceling accounts
+  - All information should be persisted using text files and serialization
+  - 100% test coverage is expected using J-Unit
+      * You should be using TDD
+  - Logging should be accomplished using Log4J
+      * All transactions should be logged
+
+
+== commands
+
+ 1. login / register
+   - open account
+   - transaction
+ 2. employee menu
+   - view accounts
+   - view customers
+ 3. admin menu
+   - approve/deny accounts
+   - make transfers
+   - close accounts
+
+NOTE: If a logged-in `email` is flagged as an `employee` or `admin`, they are asked to either login with those permissions or as a `customer`.
+
+.sample session
+----
+Welcome to the Bank of Revature, INC.
+
+    Please login or register.
+
+email address> morgan.b@bank.revature.com
+
+    Account not found, enter a password to create a new account.
+    
+password> ********
+
+    Thanks for creating an account with us!
+    
+    Your representative is:
+    
+        Devon Knopf
+        +1-123-555-0192
+        devonk@bank.revature.comjj
+
+    We're here 24/7 to support your every banking need.
+	
+	
+    Please make a selection from the following options:
+	
+	(1) make a transaction
+	(2) view accounts
+	(3) open a new account
+	(4) edit profile
+	(5) exit
+
+> 3
+
+    Which type of account would you like to open?
+    
+    (1) checking
+    (2) savings
+    
+> 1
+
+    A request has been submitted.
+    You will be contacted once a decision has been made.
+    
+...
+----
+
+
+
+== data format
+
+Data will be serialized in the following files.
+
+.users/<email>
+----
+pass="2134098eui8",role="admin",...
+----
+
+ - a _null_ `password` is a closed login
+
+
+.accounts/<number>
+----
+balance="20.00",email="taylor.j@example.com",...
+----
+
+    number,balance,customers,...
+
+ - a _null_ account `number` is pending creation
+ - a _null_ `balance` is a closed account 
+
+
+.bank.log
+----
+2018-02-07 22:04:43,641 [main] INFO bank.Main - account created for devon.k@bank.revature.com
+2018-02-06 12:48:12,213 [main] TRANS bank.Main - 50.0 : taylor.j@bank.revature.com -> 00000001
+2018-02-07 02:13:90,234 [main] TRANS bank.Main - 1.0 : 00000001 -> 00000002
+----
+
+A log of actions performed.
+ - https://www.iso.org/iso-8601-date-and-time-format.html[ISO 8601] UTC format for the `datetime`
+ - from an `email` is a deposit
+ - to an `email` is a withdrawal
+ 
+
+`TRANS` logging level message format:
+
+    <originator> POSTED <amount in USD> FROM <origin> TO <destination>
+
+
+== classes
+
+.account
+----
+int accountNumber
+String[] customers
+double balance
+----
+
+.User
+----
+String email
+char[] password (hashed, salted)
+
+// personal data
+String name
+String address
+String phone
+----
+
+.Customer extends User
+----
+getAccounts()
+transferFunds()
+newAccount()
+newAccount(other emails...)
+----
+
+.Employee extends User
+----
+getCustomers()
+approveAccounts()
+----
+
+.Admin extends Employee
+----
+closeAccount()
+transferFunds()
+----
