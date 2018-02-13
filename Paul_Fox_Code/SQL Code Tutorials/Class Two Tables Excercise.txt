@@ -1,0 +1,42 @@
+CREATE TABLE classmates(
+	id SERIAL PRIMARY KEY,
+	first_name varchar(30),
+	last_name varchar(30),
+	computer_brand integer references computers(id)
+	
+);
+
+CREATE TABLE computers(
+	id SERIAL PRIMARY KEY,
+	brand varchar(50),
+	specs text
+	
+);
+
+INSERT INTO classmates (first_name, last_name, computer_brand)
+	VALUES('Paul', 'Fox', 1),
+			('Seth', 'Lafferre', 10),
+			('Josh', 'Fox', 3),
+			('Seth', 'Fox', 6),
+			('Debbie', 'Fox', 2),
+			('Paul', 'Fox', 8),
+			('Zane', 'Huron', 4),
+			('Zach', 'Hoffman', 9),
+			('Peter', 'Moleneux', 7),
+			('Dave', 'Seoners', 5);
+			
+INSERT INTO computers (brand, specs)
+	VALUES('HP', 'Okay'),
+			('DELL', 'Crap'),
+			('ASUS', 'Great'),
+			('ACER', 'Weird'),
+			('Lenovo', 'Vlassic'),
+			('MSI', 'Good'),
+			('Razer', 'Great'),
+			('Microsoft', 'Good'),
+			('Samsung', 'Ehhhhh'),
+			('Apple', 'Crap');
+
+SELECT classmates.first_name, classmates.last_name, computers.brand, computers.specs
+FROM classmates, computers
+WHERE classmates.computer_brand = computers.id;
