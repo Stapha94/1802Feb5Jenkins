@@ -1,0 +1,15 @@
+qOne: your sort loop is running long
+
+qThree: 
+
+qSix: 
+
+qSeven: 
+
+qFifteen: 
+
+qEighteen:
+
+qNineteen: 
+
+qTwenty:
