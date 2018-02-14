@@ -1,0 +1,40 @@
+-- Joins
+
+SELECT * FROM teachers
+LEFT OUTER JOIN classes ON teachers.teacher_id = classes.teacher_id
+
+SELECT * FROM teachers
+RIGHT OUTER JOIN classes ON teachers.teacher_id = classes.teacher_id
+
+SELECT * FROM teachers
+FULL OUTER JOIN classes ON teachers.teacher_id = classes.teacher_id
+
+SELECT * FROM teachers
+INNER JOIN classes ON teachers.teacher_id = classes.teacher_id
+
+SELECT * FROM teachers
+NATURAL JOIN classes
+
+SELECT * FROM teachers
+CROSS JOIN classes
+
+SELECT first_name FROM teachers
+UNION
+SELECT name FROM classes4
+
+SELECT first_name FROM teachers 
+NATURAL JOIN classes 
+GROUP BY teacher_id 
+HAVING count(id) > 1
+
+SELECT first_name FROM teachers 
+NATURAL JOIN classes 
+GROUP BY teacher_id 
+HAVING count(id) > 1
+
+UNION
+
+SELECT first_name FROM teachers 
+FULL JOIN classes ON teachers.teacher_id = classes.teacher_id
+GROUP BY teachers.first_name
+HAVING count(id) = 0
