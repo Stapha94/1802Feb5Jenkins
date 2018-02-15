@@ -1,0 +1,52 @@
+-- Pattern Matching
+alter table teachers add column favorite_quote text
+
+update teachers set favorite_quote = 'Dont''t fail the panel'
+
+Select * from teachers where favorite_quote like '%f__l%'
+
+-- Views
+CREATE OR REPLACE VIEW classes_teaching AS
+SELECT * FROM classes NATURAL JOIN teachers;
+
+SELECT * FROM classes_teaching;
+
+INSERT INTO classes (name, teacher_id) VALUES('Hibernate', 2);
+
+-- Subqueries
+SELECT * FROM classes WHERE teacher_id IN
+	(SELECT teacher_id FROM teachers WHERE last_name LIKE '%e%');
+	
+SELECT EXISTS
+	(SELECT teacher_id FROM teachers WHERE first_name LIKE 'August');
+
+SELECT * FROM teachers ORDER BY last_name LIMIT 1;
+
+SELECT * FROM teachers WHERE teacher_id IN (
+	SELECT teacher_id FROM teachers ORDER BY last_name LIMIT 2
+) OR teacher_id IN (
+	SELECT teacher_id FROM teachers ORDER BY last_name DESC LIMIT 2
+);
+
+SELECT first_name FROM (
+	SELECT * FROM teachers
+) AS subquery;
+
+WITH teacher AS (
+	SELECT teacher_id FROM teachers WHERE first_name = 'August'
+) SELECT * FROM classes WHERE teacher_id = (SELECT teacher_id FROM teacher);
+
+WITH RECURSIVE t(n) AS (
+		VALUES(1)
+	UNION ALL
+		SELECT n+1 FROM t WHERE n < 100
+)
+SELECT sum(n) From t;
+
+WITH RECURSIVE t(n) AS (
+		VALUES('a')
+	UNION ALL
+		SELECT chr(ascii(n)+1) FROM t WHERE ascii(n) < ascii('a')+25
+
+)
+SELECT n FROM t;

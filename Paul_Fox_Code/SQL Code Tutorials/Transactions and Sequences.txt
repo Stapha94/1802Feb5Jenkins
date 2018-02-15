@@ -1,0 +1,46 @@
+--Transactions
+
+Create table transaction (
+	id SERIAL primary key,
+	data integer
+);
+
+begin;
+	insert into transaction (data) values(1);
+	savepoint save_point;
+	insert into transaction (data) values(2);
+	rollback to savepoint save_point;
+  release savepoint save_point;
+	insert into transaction (data) values(3);
+	insert into transaction (data) values('cat');
+commit;
+rollback;
+select * from transaction;
+rollback;
+
+--Sequences
+
+create sequence if not exists my_first_sequence;
+
+create sequence if not exists my_second_sequence
+	increment by 1 -- Default 1, decrement
+	minvalue 1 -- Default 1 if incrementing or -2^(63)-1 for decrementing
+	maxvalue 10000 -- Default 2^(63)-1 if incrementing, -1 for decrementing
+	start 10 --starting point for sequence, default is minvalue/maxvalue (depending if incrementing or decrementing)
+	cache 1 -- Default 1, how many values to maintain in memory
+	cycle -- (or no cycle) whether you want to repeat once max/min is reached.  Default is no cycle
+	owned by none -- or: owned by table.column - specific owner
+;
+
+create table if not exists my_serial_implementation (
+	id integer primary key default(nextval('my_second_sequence')),
+	other_data varchar(1)
+);
+
+insert into my_serial_implementation (other_data) values ('a'), ('b'), ('c');
+
+select * from my_serial_implementation;
+
+drop table my_serial_implementation;
+drop sequence my_first_sequence;
+drop sequence my_second_sequence;
