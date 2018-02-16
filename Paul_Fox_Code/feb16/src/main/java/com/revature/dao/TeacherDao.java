@@ -7,7 +7,7 @@ public interface TeacherDao {
 
     public Teacher getByID(int id);
 
-    public List<Teacher> getbyName(String firstName, String lastName);
+    public List<Teacher> getByName(String firstName, String lastName);
 
     public void newTeacher(Teacher teacher);
 

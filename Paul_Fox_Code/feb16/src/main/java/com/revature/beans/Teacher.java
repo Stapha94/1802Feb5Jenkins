@@ -28,7 +28,7 @@ public class Teacher {
         return firstName;
     }
 
-    public String getLast_name() {
+    public String getLastName() {
         return last_name;
     }
 
@@ -44,7 +44,7 @@ public class Teacher {
         this.firstName = firstName;
     }
 
-    public void setLast_name(String last_name) {
+    public void setLastName(String last_name) {
         this.last_name = last_name;
     }
 
@@ -69,13 +69,13 @@ public class Teacher {
         Teacher teacher = (Teacher) o;
         return getId() == teacher.getId() &&
                 Objects.equals(getFirstName(), teacher.getFirstName()) &&
-                Objects.equals(getLast_name(), teacher.getLast_name()) &&
+                Objects.equals(getLastName(), teacher.getLastName()) &&
                 Objects.equals(getFavoriteQuote(), teacher.getFavoriteQuote());
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(getId(), getFirstName(), getLast_name(), getFavoriteQuote());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getFavoriteQuote());
     }
 }
