@@ -1,0 +1,75 @@
+-- Defines a function which adds a trainer to the trainer table
+
+CREATE OR REPLACE FUNCTION add_trainer(fn VARCHAR, ln VARCHAR)
+RETURNS void AS $$
+BEGIN
+	INSERT INTO teachers (first_name, last_name) VALUES (fn, ln);
+END;
+$$ LANGUAGE plpgsql;
+
+ROLLBACK;
+SELECT first_name, add_trainer('Donald', 'Duck') FROM teachers WHERE first_name 
+	LIKE '%Duck';
+
+SELECT * FROM teachers;
+CREATE OR REPLACE FUNCTION delete_trainer(pk INTEGER)
+RETURNS void AS $$
+BEGIN
+	DELETE FROM teachers WHERE teacher_id = pk;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+-- SELECT add_trainer('John', 'Doe');
+-- SELECT * FROM teachers;
+-- SELECT delete_trainer(5);
+
+-- Creates a function which can evaluate an integer column for evenness
+
+-- CREATE OR REPLACE FUNCTION is_even(value INTEGER)
+-- RETURNS boolean AS $$
+-- 	BEGIN
+-- 		RETURN value % 2 = 0;
+-- 	END;
+-- $$ LANGUAGE plpgsql;
+
+-- SELECT *, is_even(teacher_id) AS even FROM teachers;
+
+
+-- Creates a function which returns a cursor that shows all trainers
+-- NOTE: This function suffers from the cursor name problem!
+
+CREATE OR REPLACE FUNCTION show_trainers() RETURNS refcursor AS $$
+	DECLARE
+		ref refcursor;
+	BEGIN
+		OPEN ref FOR SELECT first_name, last_name FROM teachers;
+		RETURN ref;
+	END;
+$$ LANGUAGE plpgsql;
+
+-- We need to know the cursor name in order for this operation to work.
+SELECT show_trainers();
+FETCH ALL IN "<unnamed portal 3>";
+
+ROLLBACK;
+
+-- Creates a function that avoids the cursor name issue by providing the cursor name as a parameter
+
+CREATE OR REPLACE FUNCTION show_trainers2(my_ref refcursor) 
+	RETURNS refcursor AS $$
+		BEGIN
+			OPEN my_ref FOR SELECT first_name, last_name FROM teachers;
+			RETURN my_ref;
+		END;
+$$ LANGUAGE plpgsql;
+
+SELECT show_trainers2('my_cursor');
+FETCH ALL IN "my_cursor";
+
+--Write a function which will add a new user to your database.
+
+--Write a function which will check if an account has a given 
+-- 	amount of money in it.
+

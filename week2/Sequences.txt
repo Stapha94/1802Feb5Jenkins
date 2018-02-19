@@ -1,0 +1,30 @@
+--Sequences
+
+CREATE SEQUENCE IF NOT EXISTS my_first_sequence;
+
+CREATE SEQUENCE IF NOT EXISTS my_second_sequence
+	INCREMENT BY 1  --DEFAULT 1, DECREMENT
+	MINVALUE 1 --DEFAULT 1 if increment or -2^(63)-1 for decrementing
+	MAXVALUE 100000 --DEFAULT 2^(63)-1 if incrementing, -1 if decrementing
+	START 10 --starting point for sequence, default is minvalue/maxvalue
+	CACHE 1 --default 1, how many values to maintain in memory
+	CYCLE --(or NO CYCLE) whether sequence cycles: default no cycle
+	OWNED BY NONE -- or: OWNED BY table.column - specifies owner
+;
+
+CREATE TABLE IF NOT EXISTS my_serial_implementation (
+	id INTEGER PRIMARY KEY DEFAULT(nextval('my_second_sequence')),
+	other_data VARCHAR(1)
+);
+
+INSERT INTO my_serial_implementation (other_data) VALUES ('a'), ('b'), ('c');
+
+SELECT * FROM my_serial_implementation;
+
+DROP TABLE my_serial_implementation;
+DROP SEQUENCE my_first_sequence;
+DROP SEQUENCE my_second_sequence;
+
+
+
+

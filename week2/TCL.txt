@@ -1,0 +1,29 @@
+CREATE TABLE IF NOT EXISTS transaction (
+	id SERIAL PRIMARY KEY,
+	data INTEGER
+);
+
+ROLLBACK;
+
+-- Begins transaction
+BEGIN;
+	INSERT INTO transaction (data) VALUES (1);
+	
+	-- Create a savepoint of current transaction state
+	SAVEPOINT save_point;
+	INSERT INTO transaction (data) VALUES (2);
+
+	-- Rolls back to state @ savepoint 'save_point'
+	ROLLBACK TO SAVEPOINT save_point;
+
+	-- Releases savepoint 'save_point'
+	RELEASE SAVEPOINT save_point;
+	INSERT INTO transaction (data) VALUES (3);
+	INSERT INTO transaction (data) VALUES ('cat');
+-- Commits transaction (transaction completes)
+COMMIT;
+
+--Rolls back, but nothing happens as we already committed
+ROLLBACK;
+SELECT * FROM transaction;
+

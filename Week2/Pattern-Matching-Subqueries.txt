@@ -1,0 +1,48 @@
+-- --Pattern matching
+SELECT * FROM teachers WHERE favorite_quote LIKE '%f__l%';
+
+-- --Views
+CREATE OR REPLACE VIEW classes_teaching AS
+SELECT * FROM classes NATURAL JOIN teachers;
+
+--Subqueries
+SELECT * FROM classes WHERE teacher_id IN
+	(1, 3);
+
+-- Exists
+SELECT EXISTS 
+	(SELECT teacher_id FROM teachers WHERE first_name LIKE 'August');
+	
+SELECT * FROM teachers WHERE teacher_id IN (
+	SELECT 	teacher_id FROM teachers ORDER BY last_name LIMIT 2
+) OR teacher_id IN (
+	SELECT teacher_id FROM teachers ORDER BY last_name DESC LIMIT 2
+);
+
+SELECT first_name FROM (
+	SELECT * FROM teachers
+) AS subquery;
+
+WITH teacher AS (
+	SELECT teacher_id FROM teachers WHERE first_name = 'August'	
+) SELECT * FROM classes WHERE teacher_id = (SELECT teacher_id FROM teacher);
+
+-- WITH RECURSIVE t(n) AS (
+-- 		VALUES(1)
+-- 	UNION ALL
+-- 		SELECT n+1 FROM t WHERE n < 100
+-- )
+-- SELECT sum(n) FROM t;
+
+-- WITH RECURSIVE t(n) AS (
+-- 		VALUES ('a')
+-- 	UNION ALL
+-- 		SELECT chr(ascii(n)+1) FROM t WHERE ascii(n) < ascii('a')+25
+-- )
+-- SELECT n FROM t;
+
+-- SELECT first_name, last_name FROM classes_teaching;
+
+-- INSERT INTO classes (name, teacher_id) VALUES ('Hibernate', 2);
+
+

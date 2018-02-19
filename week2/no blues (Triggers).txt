@@ -1,0 +1,33 @@
+CREATE TABLE IF NOT EXISTS colors (
+	id SERIAL PRIMARY KEY,
+	color varchar(40)
+);
+
+SELECT * FROM colors;
+
+-- INSERT INTO colors (color) VALUES ('blue'), ('purple'), ('pink'); 
+INSERT INTO colors (color) VALUES ('red'), ('orange'), ('cornflower'), ('blue');
+UPDATE colors SET color = 'blue' WHERE color = 'red';
+
+
+
+
+-- CREATE OR REPLACE FUNCTION no_blues_process()
+-- RETURNS trigger AS $$
+-- 	BEGIN
+-- 		IF(TG_OP = 'INSERT') THEN
+-- 			IF(UPPER(NEW.color) = 'BLUE') THEN
+-- 				RETURN NULL;
+-- 			END IF;
+-- 		END IF;
+-- 		IF(UPPER(NEW.color) = 'BLUE') THEN
+-- 			RETURN OLD;
+-- 		END IF;
+-- 		RETURN NEW;
+-- 	END;
+-- $$ LANGUAGE plpgsql;
+
+-- CREATE TRIGGER no_blues
+-- 	BEFORE INSERT OR UPDATE ON colors
+-- 	FOR EACH ROW
+-- 	EXECUTE PROCEDURE no_blues_process();
