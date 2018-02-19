@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Study-Pedia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .side-nav {
+
+            display: block;
+            margin-left: 3px;
+            padding: 0;
+            width: 33%;
+            float: left;
+            background-color: rgb(226, 226, 226);
+            word-wrap: break-word;
+
+        }
+
+        .side-nav ul {
+
+            list-style: none;
+
+        }
+
+        .main-content {
+            
+            display: block;
+            width: 66%;
+            background-color: fuchsia;
+            float: right;
+            word-wrap: break-word;
+
+        }
+        #feature {
+
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+
+        }
+
+        .news {
+
+            color: green;
+
+        }
+        .news::first-letter {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <nav class="side-nav" >
+            <ul>
+                <li><a href="https://www.google.com/search?q=core+java&rlz=1C1SQJL_enUS782US782&oq=core+java&aqs=chrome..69i57j0l5.1104j0j7&sourceid=chrome&ie=UTF-8">Core Java</a></li>
+                <li><a href="https://www.google.com/search?q=sql&rlz=1C1SQJL_enUS782US782&oq=sql&aqs=chrome..69i57j69i60l3j0l2.564j0j9&sourceid=chrome&ie=UTF-8">SQL</a></li>
+                <li><a href="https://www.google.com/search?q=jdbc&rlz=1C1SQJL_enUS782US782&oq=jdbc&aqs=chrome..69i57j69i60l3j69i59j0.833j0j9&sourceid=chrome&ie=UTF-8">JDBC</a></li>
+                <li><a href="https://www.google.com/search?q=html&rlz=1C1SQJL_enUS782US782&oq=html&aqs=chrome..69i57j69i60j69i65j69i60l2j0.727j0j9&sourceid=chrome&ie=UTF-8">HTML</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content">
+        <article class="news" id="feature">
+            <h1>The 1802_Feb5 Online Study Guide</h1>
+            <p>Select a topic in the navbar or start your search
+                by visiting <a href="http://www.google.com">Your Friend Google</a>
+            </p>
+        </article>
+    </div>
+</body>
+</html>
