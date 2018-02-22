@@ -24,7 +24,7 @@ public class DatabaseInit {
             ps.execute();
 
             query = "CREATE TABLE IF NOT EXISTS departments( "
-                    + "department_id SERIAL PRIMARY KEY, "
+                    + "department_id SERIAL PRIMARY KEY ON DELETE SET NULL, "
                     + "department_name VARCHAR(40), "
                     + "department_head INTEGER REFERENCES employees(employee_id));";
             ps = conn.prepareStatement(query);

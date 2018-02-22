@@ -117,9 +117,15 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
             ps.setString(3, employee.getSSN());
             ps.setInt(4, employee.getSupervisorId());
             ps.setInt(5, employee.getDepartmentId());
-            ps.execute();
+            ResultSet rs = ps.executeQuery();
 
             ps.close();
+
+            if(rs.next()){
+
+                employee.setEmployeeId(rs.getInt("employee_id"));
+
+            }
 
         } catch (SQLException e){
 
@@ -139,13 +145,14 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
         try(Connection conn = connectionUtil.getConnection()){
 
             PreparedStatement ps;
-            String query = "UPDATE employees SET first_name = ?, last_name = ?, ssn = ?, supervisor = ?, department = ?";
+            String query = "UPDATE employees SET first_name = ?, last_name = ?, ssn = ?, supervisor = ?, department = ? WHERE employee_id = ?";
             ps = conn.prepareStatement(query);
             ps.setString(1, employee.getFirstName());
             ps.setString(2, employee.getLastName());
             ps.setString(3, employee.getSSN());
             ps.setInt(4, employee.getSupervisorId());
             ps.setInt(5, employee.getDepartmentId());
+            ps.setInt(6, employee.getEmployeeId());
 
             ps.close();
 

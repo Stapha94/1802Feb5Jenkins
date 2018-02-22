@@ -2,11 +2,13 @@ package com.revature.dao;
 
 import com.revature.beans.Department;
 
+import java.util.List;
+
 public interface DepartmentDao {
 
-    Department getById(Department department);
+    Department getById(int departmentId);
 
-    Department getByName(Department department);
+    List<Department> getByName(Department department);
 
     void newDepartment(Department department);
 
