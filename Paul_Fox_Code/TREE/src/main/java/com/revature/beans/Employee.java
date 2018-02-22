@@ -7,6 +7,7 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String SSN;
+    private int employeeId;
     private int supervisor;
     private int form;
 
@@ -43,6 +44,14 @@ public class Employee {
         this.SSN = SSN;
     }
 
+    public int getEmployeeId(){
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId){
+        this.employeeId = employeeId;
+    }
+
     public int getSupervisor() {
         return supervisor;
     }
@@ -64,7 +73,8 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return getSupervisor() == employee.getSupervisor() &&
+        return getEmployeeId() == employee.getEmployeeId() &&
+                getSupervisor() == employee.getSupervisor() &&
                 getForm() == employee.getForm() &&
                 Objects.equals(getFirstName(), employee.getFirstName()) &&
                 Objects.equals(getLastName(), employee.getLastName()) &&
@@ -74,7 +84,7 @@ public class Employee {
     @Override
     public int hashCode() {
 
-        return Objects.hash(getFirstName(), getLastName(), getSSN(), getSupervisor(), getForm());
+        return Objects.hash(getFirstName(), getLastName(), getSSN(), getEmployeeId(), getSupervisor(), getForm());
     }
 
     @Override
@@ -83,8 +93,10 @@ public class Employee {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", SSN='" + SSN + '\'' +
+                ", employeeId=" + employeeId +
                 ", supervisor=" + supervisor +
                 ", form=" + form +
                 '}';
     }
+
 }
