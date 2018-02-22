@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM Manipulation</title>
+</head>
+<body>
+    <div>
+        <div></div>
+        <div></div>
+        <ul id="list">
+            <li><a href="">Item one</a></li>
+            <li id="remove-me"><a href="">Item two</a></li>
+            <li><a href="">Item three</a></li>
+        </ul>
+        <button>Click Me</button>
+        <input id="username" type="text" placeholder="Your name"/>
+    </div>
+    <script>
+        var list = document.querySelector("#list");
+        var item = document.querySelector("#remove-me");
+        var newItem = document.createElement('li');
+        newItem.id = "dont-remove-me";
+        newItem.innerText = "Brand new Item";
+        
+        setTimeout(()=>{
+            list.removeChild(item);
+            list.appendChild(newItem);
+        }, 5000);
+
+        document.querySelectorAll('button')[0].addEventListener('click', 
+        (evt)=>{
+            alert("Hello, World!");
+        })
+
+        document.querySelector("#username").addEventListener('keypress',
+        (evt) => {
+            let value = evt.target.value;
+            if(evt.keyCode == 13 && value) {
+                alert(`Hello ${value}`);
+            }
+        });
+    </script>
+</body>
+</html>

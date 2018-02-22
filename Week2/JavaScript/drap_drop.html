@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #start,
+        #finish {
+            min-width: 100px;
+            min-height: 100px;
+            border: 1px solid black;
+        }
+
+        #start {
+            position: absolute;
+            top: 100px;
+            left: 200px;
+        }
+
+        #finish {
+            position: absolute;
+            top: 200px;
+            left: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="start">
+        <p id="draggable" draggable="true">drag me</p>
+    </div>
+    <div id="finish"></div>
+    <button>Click</button>
+    <script>
+        document.querySelector("#draggable").addEventListener('dragstart',
+            (evt) => {
+                evt.dataTransfer.setData("text", evt.target.innerText);
+            });
+
+        document.querySelector("#finish").addEventListener('dragover',
+            (evt) => {
+                evt.preventDefault();
+            });
+        document.querySelector("#finish").addEventListener('drop',
+            (evt) => {
+                evt.preventDefault();
+
+                let data = evt.dataTransfer.getData("text");
+
+                let old = document.querySelector("#draggable");
+                let p = old.parentNode;
+                p.removeChild(old);
+
+                let newP = document.createElement('p');
+                newP.id = 'draggable';
+                newP.draggable = true;
+                newP.innerText = data;
+                newP.addEventListener('dragstart',
+                    (evt) => {
+                        evt.dataTransfer.setData("text", evt.target.innerText);
+                    });
+
+                document.querySelector("#finish").appendChild(newP);
+            });
+
+        document.querySelector("#start").addEventListener('dragover',
+            (evt) => {
+                evt.preventDefault();
+            });
+        document.querySelector("#start").addEventListener('drop',
+            (evt) => {
+                evt.preventDefault();
+
+                let data = evt.dataTransfer.getData("text");
+
+                let old = document.querySelector("#draggable");
+                let p = old.parentNode;
+                p.removeChild(old);
+
+                let newP = document.createElement('p');
+                newP.id = 'draggable';
+                newP.draggable = true;
+                newP.innerText = data;
+                newP.addEventListener('dragstart',
+                    (evt) => {
+                        evt.dataTransfer.setData("text", evt.target.innerText);
+                    });
+
+                document.querySelector("#start").appendChild(newP);
+            });
+
+            document.querySelector('button').addEventListener('click', 
+            function(evt){
+                console.log(evt);
+            });
+    </script>
+</body>
+
+</html>

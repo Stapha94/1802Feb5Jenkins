@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Forms</title>
+</head>
+
+<body>
+    <form action="/" method="POST">
+        <input type="text" name="username" />
+        <input type="password" name="password">
+        <input type="password" name="conf-password">
+
+        <div>
+            <input name="gender-group" id="gender-group-0" type="radio" value="Male" />
+            <label for="">Male</label>
+        </div>
+        <div>
+            <input name="gender-group" id="gender-group-1" type="radio" value="Female" />
+            <label for="">Female</label>
+        </div>
+        <div>
+            <select name="job-select" id="job-select">
+                <option value="Software Engineer">Software Engineer</option>
+                <option value="Web Developer">Web Developer</option>
+                <option value="Full-time Badass">Full-time Badass</option>
+            </select>
+        </div>
+        <div>
+            <textarea name="bio-text" id="bio-text" cols="30" rows="10"></textarea>
+        </div>
+        <div>
+            <button type="submit" name="submit-button" id="submit-button">Submit</button>
+        </div>
+        <div>
+            <button type="reset" name="reset-button" id="reset-button">Reset</button>
+        </div>
+    </form>
+</body>
+
+</html>

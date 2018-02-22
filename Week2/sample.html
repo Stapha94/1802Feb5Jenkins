@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Study-pedia</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .side-nav {
+            margin-left: 5px;
+            padding: 0;
+            width: 33%;
+            float: left;
+        }
+        .side-nav ul {
+            list-style: none;
+        }
+
+        .main-content {
+            margin-left: 33%;
+            padding: 0;
+            width: 66%
+        }
+
+        #feature h1 {
+            color: blue;
+            font-size: 5em;
+        }
+
+        .news p::first-letter {
+            font-size: 1.5em;
+            color: red;
+            border: 1px solid green;
+            padding: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <nav class="side-nav">
+            <ul>
+                <li>
+                    <a href="https://www.google.com/search?q=Core+Java+Tutorials">Core Java</a>
+                </li>
+                <li>
+                    <a href="https://www.google.com/search?q=SQL+Tutorials">SQL</a>
+                </li>
+                <li>
+                    <a href="https://www.google.com/search?q=JDBC+Tutorials">JDBC</a>
+                </li>
+                <li>
+                    <a href="https://www.google.com/search?q=HTML+Tutorials">HTML</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <article class="news" id="feature">
+            <h1>The 1802_Feb5 online study guide</h1>
+            <p>Select a topic in the navbar or start your search by visiting
+                <a href="https://www.google.com">Your friend Google</a>
+            </p>
+        </article>
+    </div>
+</body>
+
+</html>

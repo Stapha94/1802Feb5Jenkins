@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pokemon</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        #frame {
+            background-image: url("frame.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            min-width: 256px;
+            min-height: 224px;
+            margin: 0 auto;
+            width: 5%;
+        }
+
+        #controls {
+            margin-top: 25px;
+            min-width: 256px;
+            /* min-height: 224px; */
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        #controls input[type="text"] {
+            width: 85%;
+        }
+
+        #frame img {
+            position: absolute;
+            top: 95px;
+            left: 391px;
+            width: 160px;
+            height: 144px;
+        }
+        
+        #title {
+            font-size: 2.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <label for=""style="float:left;position:absolute;top:25px;left25px;"></label>
+    <div class="container">
+        <div id="title"></div>
+        <div id="frame">
+            <img src="" alt="" />
+        </div>
+        <div id="controls">
+            <input type="text" />
+            <input type="image" src="button.png" width="32" height="32" />
+        </div>
+    </div>
+    <script>
+        setInterval(()=>{
+            let date = new Date();
+            let timeStr = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+            document.querySelector('label').innerHTML = timeStr;
+        }, 1000);
+        
+    </script>
+</body>
+
+</html>
