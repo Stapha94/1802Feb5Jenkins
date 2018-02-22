@@ -8,16 +8,18 @@ public class Employee {
     private String lastName;
     private String SSN;
     private int employeeId;
-    private int supervisor;
-    private int form;
+    private int departmentId;
+    private int supervisorId;
 
     public Employee(){}
 
-    public Employee(String firstName, String lastName, String SSN, int supervisor) {
+    public Employee(String firstName, String lastName, String SSN, int employeeId, int supervisorId, int departmentId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.SSN = SSN;
-        this.supervisor = supervisor;
+        this.employeeId = employeeId;
+        this.departmentId = departmentId;
+        this.supervisorId = supervisorId;
     }
 
     public String getFirstName() {
@@ -44,28 +46,28 @@ public class Employee {
         this.SSN = SSN;
     }
 
-    public int getEmployeeId(){
+    public int getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId){
+    public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
 
-    public int getSupervisor() {
-        return supervisor;
+    public int getDepartmentId() {
+        return departmentId;
     }
 
-    public void setSupervisor(int supervisor) {
-        this.supervisor = supervisor;
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public int getForm() {
-        return form;
+    public int getSupervisorId() {
+        return supervisorId;
     }
 
-    public void setForm(int form) {
-        this.form = form;
+    public void setSupervisorId(int supervisorId) {
+        this.supervisorId = supervisorId;
     }
 
     @Override
@@ -74,8 +76,8 @@ public class Employee {
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
         return getEmployeeId() == employee.getEmployeeId() &&
-                getSupervisor() == employee.getSupervisor() &&
-                getForm() == employee.getForm() &&
+                getDepartmentId() == employee.getDepartmentId() &&
+                getSupervisorId() == employee.getSupervisorId() &&
                 Objects.equals(getFirstName(), employee.getFirstName()) &&
                 Objects.equals(getLastName(), employee.getLastName()) &&
                 Objects.equals(getSSN(), employee.getSSN());
@@ -84,7 +86,7 @@ public class Employee {
     @Override
     public int hashCode() {
 
-        return Objects.hash(getFirstName(), getLastName(), getSSN(), getEmployeeId(), getSupervisor(), getForm());
+        return Objects.hash(getFirstName(), getLastName(), getSSN(), getEmployeeId(), getDepartmentId(), getSupervisorId());
     }
 
     @Override
@@ -94,9 +96,8 @@ public class Employee {
                 ", lastName='" + lastName + '\'' +
                 ", SSN='" + SSN + '\'' +
                 ", employeeId=" + employeeId +
-                ", supervisor=" + supervisor +
-                ", form=" + form +
+                ", departmentId=" + departmentId +
+                ", supervisorId=" + supervisorId +
                 '}';
     }
-
 }

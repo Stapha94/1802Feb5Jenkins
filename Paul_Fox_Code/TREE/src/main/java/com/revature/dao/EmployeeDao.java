@@ -8,9 +8,9 @@ public interface EmployeeDao {
 
     Employee getById(int employeeId);
 
-    List<Employee> getByName(String name);
+    List<Employee> getByName(String firstName, String lastName);
 
-    int newEmployee(Employee employee);
+    void newEmployee(Employee employee);
 
     void update(Employee employee);
 
