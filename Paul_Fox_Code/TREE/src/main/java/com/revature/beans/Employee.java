@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import com.revature.services.EmployeeService;
+
 import java.util.Objects;
 
 public class Employee {

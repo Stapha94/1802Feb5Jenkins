@@ -41,7 +41,7 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
                 String email = rs.getString("email");
                 int departmentId = rs.getInt("department");
                 int supervisorId = rs.getInt("supervisor");
-                return new Employee(firstName, lastName, SSN, email, hash, employeeId, supervisorId, departmentId);
+                return new Employee(firstName, lastName, SSN, email, hash, employeeId, departmentId, supervisorId);
 
             }
             else
@@ -89,7 +89,7 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
                 int departmentId = rs.getInt("department");
                 int supervisorId = rs.getInt("supervisor");
                 int employeeId = rs.getInt("employee_id");
-                employeeList.add(new Employee(fName, lName, SSN, email, hash, employeeId, supervisorId, departmentId));
+                employeeList.add(new Employee(fName, lName, SSN, email, hash, employeeId, departmentId, supervisorId));
 
             }
             return employeeList;
@@ -97,6 +97,43 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
         } catch (SQLException e){
 
             System.out.println("Failed to get Employees by name");
+            e.printStackTrace();
+            return null;
+
+        }
+
+    }
+
+    @Override
+    public Employee getByEmail(String email){
+
+        try(Connection conn = connectionUtil.getConnection()){
+
+            PreparedStatement ps;
+            String query = "SELECT * FROM employees WHERE email = ?;";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            ps.close();
+
+            if(rs.next()){
+
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String SSN = rs.getString("ssn");
+                String hash = rs.getString("hash");
+                int departmentId = rs.getInt("department");
+                int supervisorId = rs.getInt("supervisor");
+                int employeeId = rs.getInt("employee_id");
+                return new Employee(firstName, lastName, SSN, email, hash, employeeId, departmentId, supervisorId);
+
+            }
+            return null;
+
+        } catch (SQLException e){
+
+            System.out.println("Failed to get Employee by Email");
             e.printStackTrace();
             return null;
 
@@ -114,15 +151,15 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
         try(Connection conn = connectionUtil.getConnection()){
 
             PreparedStatement ps;
-            String query = "INSERT INTO employees (first_name, last_name, ssn, email, hash, supervisor, department) VALUES (?, ?, ?, ?, ?, ? ,?) RETURNING employee_id;";
+            String query = "INSERT INTO employees (first_name, last_name, ssn, email, hash, department, supervisor) VALUES (?, ?, ?, ?, ?, ? ,?) RETURNING employee_id;";
             ps = conn.prepareStatement(query);
             ps.setString(1, employee.getFirstName());
             ps.setString(2, employee.getLastName());
             ps.setString(3, employee.getSSN());
             ps.setString(4, employee.getEmail());
             ps.setString(5, employee.getPassword());
-            ps.setInt(6, employee.getSupervisorId());
-            ps.setInt(7, employee.getDepartmentId());
+            ps.setInt(6, employee.getDepartmentId());
+            ps.setInt(7, employee.getSupervisorId());
             ResultSet rs = ps.executeQuery();
 
             ps.close();
@@ -151,15 +188,15 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
         try(Connection conn = connectionUtil.getConnection()){
 
             PreparedStatement ps;
-            String query = "UPDATE employees SET first_name = ?, last_name = ?, ssn = ?, email = ?, hash = ?, supervisor = ?, department = ? WHERE employee_id = ?";
+            String query = "UPDATE employees SET first_name = ?, last_name = ?, ssn = ?, email = ?, hash = ?, department = ?, supervisor = ? WHERE employee_id = ?";
             ps = conn.prepareStatement(query);
             ps.setString(1, employee.getFirstName());
             ps.setString(2, employee.getLastName());
             ps.setString(3, employee.getSSN());
             ps.setString(4, employee.getEmail());
             ps.setString(5, employee.getPassword());
-            ps.setInt(6, employee.getSupervisorId());
-            ps.setInt(7, employee.getDepartmentId());
+            ps.setInt(6, employee.getDepartmentId());
+            ps.setInt(7, employee.getSupervisorId());
             ps.setInt(8, employee.getEmployeeId());
 
             ps.close();

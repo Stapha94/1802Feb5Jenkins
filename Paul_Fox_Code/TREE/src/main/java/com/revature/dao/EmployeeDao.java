@@ -10,6 +10,8 @@ public interface EmployeeDao {
 
     List<Employee> getByName(String firstName, String lastName);
 
+    Employee getByEmail(String email);
+
     void newEmployee(Employee employee);
 
     void updateEmployee(Employee employee);
