@@ -12,6 +12,11 @@ public class ReimbursementDaoJdbcPg implements ReimbursementDao {
 
     private static ConnectionUtil connectionUtil = ConnectionUtil.getConnectionUtil();
 
+    /**
+     * Searches the Database for a Reimbursement by the given Reimbursement ID.
+     * @param reimbursementId The Reimbursement ID to search the Database for
+     * @return Returns the Reimbursement Object that is found in the database, or null if nothing is found or an error occurs.
+     */
     @Override
     public Reimbursement getById(int reimbursementId) {
 
@@ -41,6 +46,10 @@ public class ReimbursementDaoJdbcPg implements ReimbursementDao {
 
     }
 
+    /**
+     * Creates a new Reimbursement in the Database from the given Reimbursement Object.
+     * @param reimbursement The Reimbursement to be created.
+     */
     @Override
     public void newReimbursement(Reimbursement reimbursement) {
 
@@ -66,6 +75,10 @@ public class ReimbursementDaoJdbcPg implements ReimbursementDao {
 
     }
 
+    /**
+     * Updates the given Reimbursement in the Database.
+     * @param reimbursement The Reimbursement to be updated.
+     */
     @Override
     public void updateReimbursement(Reimbursement reimbursement) {
 
@@ -91,6 +104,10 @@ public class ReimbursementDaoJdbcPg implements ReimbursementDao {
 
     }
 
+    /**
+     * Deletes the given Reimbursement from the Database.
+     * @param reimbursement The Reimbursement to be deleted
+     */
     @Override
     public void deleteReimbursement(Reimbursement reimbursement) {
 

@@ -80,7 +80,7 @@ public class FormDaoJdbcPg implements FormDao {
 
             PreparedStatement ps;
             String query = "INSERT INTO forms (date, time, location, description, cost, event_type, grading_format, missed_time, attachments, approval_msg, projected_reimbursement, employee) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING form_id;";
             ps = conn.prepareStatement(query);
             ps.setString(1, form.getDate());
             ps.setString(2, form.getTime());
