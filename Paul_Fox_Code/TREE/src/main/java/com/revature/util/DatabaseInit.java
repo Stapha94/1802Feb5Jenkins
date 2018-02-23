@@ -42,7 +42,7 @@ public class DatabaseInit {
             ps.execute();
 
             query = "CREATE TABLE IF NOT EXISTS forms( "
-                    + "form_id SERIAL PRIMARY KEY, "
+                    + "form_id SERIAL PRIMARY KEY ON DELETE CASCADE, "
                     + "date VARCHAR(30), "
                     + "time VARCHAR(50), "
                     + "location VARCHAR(100), "
