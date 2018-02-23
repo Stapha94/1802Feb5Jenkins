@@ -2,15 +2,15 @@ package com.revature.beans;
 
 import java.util.Objects;
 
-public class Results {
+public class Result {
 
     private int resultId;
     private int formId;
     private float grade;
 
-    public Results(){}
+    public Result(){}
 
-    public Results(int resultId, int formId, float grade) {
+    public Result(int resultId, int formId, float grade) {
         this.resultId = resultId;
         this.formId = formId;
         this.grade = grade;
@@ -44,10 +44,10 @@ public class Results {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Results results = (Results) o;
-        return getResultId() == results.getResultId() &&
-                getFormId() == results.getFormId() &&
-                Float.compare(results.getGrade(), getGrade()) == 0;
+        Result result = (Result) o;
+        return getResultId() == result.getResultId() &&
+                getFormId() == result.getFormId() &&
+                Float.compare(result.getGrade(), getGrade()) == 0;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class Results {
 
     @Override
     public String toString() {
-        return "Results{" +
+        return "Result{" +
                 "resultId=" + resultId +
                 ", formId=" + formId +
                 ", grade=" + grade +
