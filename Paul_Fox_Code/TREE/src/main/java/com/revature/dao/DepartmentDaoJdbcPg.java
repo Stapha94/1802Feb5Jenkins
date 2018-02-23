@@ -105,7 +105,7 @@ public class DepartmentDaoJdbcPg implements DepartmentDao {
         try(Connection conn = connectionUtil.getConnection()){
 
             PreparedStatement ps;
-            String query = "INSERT INTO departments (department_head, department_name) VALUES (?, ?);";
+            String query = "INSERT INTO departments (department_head, department_name) VALUES (?, ?) RETURNING department_id;";
             ps = conn.prepareStatement(query);
             ps.setInt(1, department.getDepartmentHead());
             ps.setInt(2, department.getDepartmentId());

@@ -114,7 +114,7 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
         try(Connection conn = connectionUtil.getConnection()){
 
             PreparedStatement ps;
-            String query = "INSERT INTO employees (first_name, last_name, ssn, email, hash, supervisor, department) VALUES (?, ?, ?, ?, ?, ? ,?);";
+            String query = "INSERT INTO employees (first_name, last_name, ssn, email, hash, supervisor, department) VALUES (?, ?, ?, ?, ?, ? ,?) RETURNING employee_id;";
             ps = conn.prepareStatement(query);
             ps.setString(1, employee.getFirstName());
             ps.setString(2, employee.getLastName());
