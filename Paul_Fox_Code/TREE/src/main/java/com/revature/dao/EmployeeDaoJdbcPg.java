@@ -37,9 +37,11 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
                 String firstName = rs.getString("first_name");
                 String lastName = rs.getString("last_name");
                 String SSN = rs.getString("ssn");
+                String hash = rs.getString("hash");
+                String email = rs.getString("email");
                 int departmentId = rs.getInt("department");
                 int supervisorId = rs.getInt("supervisor");
-                return new Employee(firstName, lastName, SSN, employeeId, supervisorId, departmentId);
+                return new Employee(firstName, lastName, SSN, email, hash, employeeId, supervisorId, departmentId);
 
             }
             else
@@ -82,10 +84,12 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
                 String fName = rs.getString("first_name");
                 String lName = rs.getString("last_name");
                 String SSN = rs.getString("ssn");
-                int employeeId = rs.getInt("employee_id");
+                String hash = rs.getString("hash");
+                String email = rs.getString("email");
                 int departmentId = rs.getInt("department");
                 int supervisorId = rs.getInt("supervisor");
-                employeeList.add(new Employee(fName, lName, SSN, employeeId, supervisorId, departmentId));
+                int employeeId = rs.getInt("employee_id");
+                employeeList.add(new Employee(fName, lName, SSN, email, hash, employeeId, supervisorId, departmentId));
 
             }
             return employeeList;
@@ -110,13 +114,15 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
         try(Connection conn = connectionUtil.getConnection()){
 
             PreparedStatement ps;
-            String query = "INSERT INTO employees (first_name, last_name, ssn, supervisor, department) VALUES (?, ?, ?, ?, ?);";
+            String query = "INSERT INTO employees (first_name, last_name, ssn, email, hash, supervisor, department) VALUES (?, ?, ?, ?, ?, ? ,?);";
             ps = conn.prepareStatement(query);
             ps.setString(1, employee.getFirstName());
             ps.setString(2, employee.getLastName());
             ps.setString(3, employee.getSSN());
-            ps.setInt(4, employee.getSupervisorId());
-            ps.setInt(5, employee.getDepartmentId());
+            ps.setString(4, employee.getEmail());
+            ps.setString(5, employee.getPassword());
+            ps.setInt(6, employee.getSupervisorId());
+            ps.setInt(7, employee.getDepartmentId());
             ResultSet rs = ps.executeQuery();
 
             ps.close();
@@ -140,19 +146,21 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
      * @param employee The employee to be updated.
      */
     @Override
-    public void update(Employee employee) {
+    public void updateEmployee(Employee employee) {
 
         try(Connection conn = connectionUtil.getConnection()){
 
             PreparedStatement ps;
-            String query = "UPDATE employees SET first_name = ?, last_name = ?, ssn = ?, supervisor = ?, department = ? WHERE employee_id = ?";
+            String query = "UPDATE employees SET first_name = ?, last_name = ?, ssn = ?, email = ?, hash = ?, supervisor = ?, department = ? WHERE employee_id = ?";
             ps = conn.prepareStatement(query);
             ps.setString(1, employee.getFirstName());
             ps.setString(2, employee.getLastName());
             ps.setString(3, employee.getSSN());
-            ps.setInt(4, employee.getSupervisorId());
-            ps.setInt(5, employee.getDepartmentId());
-            ps.setInt(6, employee.getEmployeeId());
+            ps.setString(4, employee.getEmail());
+            ps.setString(5, employee.getPassword());
+            ps.setInt(6, employee.getSupervisorId());
+            ps.setInt(7, employee.getDepartmentId());
+            ps.setInt(8, employee.getEmployeeId());
 
             ps.close();
 
@@ -171,7 +179,7 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
      * @param employee The employee to be removed from the database.
      */
     @Override
-    public void delete(Employee employee) {
+    public void deleteEmployee(Employee employee) {
 
         Connection conn = connectionUtil.getConnection();
 

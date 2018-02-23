@@ -19,6 +19,8 @@ public class DatabaseInit {
                     + "first_name VARCHAR(40), "
                     + "last_name VARCHAR(40), "
                     + "ssn VARCHAR(11), "
+                    + "emsil VARCHAR(100), "
+                    + "hash VARCHAR(40), "
                     + "supervisor INTEGER REFERENCES employees(employee_id));";
             ps = conn.prepareStatement(query);
             ps.execute();

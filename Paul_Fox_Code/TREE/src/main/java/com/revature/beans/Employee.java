@@ -7,16 +7,20 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String SSN;
+    private String email;
+    private String password;
     private int employeeId;
     private int departmentId;
     private int supervisorId;
 
     public Employee(){}
 
-    public Employee(String firstName, String lastName, String SSN, int employeeId, int supervisorId, int departmentId) {
+    public Employee(String firstName, String lastName, String SSN, String email, String password, int employeeId, int departmentId, int supervisorId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.SSN = SSN;
+        this.email = email;
+        this.password = password;
         this.employeeId = employeeId;
         this.departmentId = departmentId;
         this.supervisorId = supervisorId;
@@ -44,6 +48,22 @@ public class Employee {
 
     public void setSSN(String SSN) {
         this.SSN = SSN;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getEmployeeId() {
@@ -80,13 +100,15 @@ public class Employee {
                 getSupervisorId() == employee.getSupervisorId() &&
                 Objects.equals(getFirstName(), employee.getFirstName()) &&
                 Objects.equals(getLastName(), employee.getLastName()) &&
-                Objects.equals(getSSN(), employee.getSSN());
+                Objects.equals(getSSN(), employee.getSSN()) &&
+                Objects.equals(getEmail(), employee.getEmail()) &&
+                Objects.equals(getPassword(), employee.getPassword());
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(getFirstName(), getLastName(), getSSN(), getEmployeeId(), getDepartmentId(), getSupervisorId());
+        return Objects.hash(getFirstName(), getLastName(), getSSN(), getEmail(), getPassword(), getEmployeeId(), getDepartmentId(), getSupervisorId());
     }
 
     @Override
@@ -95,6 +117,7 @@ public class Employee {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", SSN='" + SSN + '\'' +
+                ", email='" + email + '\'' +
                 ", employeeId=" + employeeId +
                 ", departmentId=" + departmentId +
                 ", supervisorId=" + supervisorId +
