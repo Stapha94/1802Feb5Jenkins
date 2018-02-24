@@ -104,6 +104,11 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
 
     }
 
+    /**
+     * Gets and returns an Employee Object that was found by searching the for an email.
+     * @param email The email to search the database for
+     * @return Returns the Employee Object found by the search, or null if nothing was found or an error occurs.
+     */
     @Override
     public Employee getByEmail(String email){
 
