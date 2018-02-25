@@ -5,22 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Example Assignment</title>
-    <script src="Example JS.js"></script>
+    
     <link rel="stylesheet" type="text/css" media="screen" href="Example CSS.css" />
 </head>
 <body>
     <div class="container">
         <button id="delete">X</button>
-        <ul class="list">
-            <li class="list-item" id="draggable" draggable="true">Item 1</li>
-            <li class="list-item">Item 2</li>
-            <li class="list-item">Item 3</li>
-            <p id="start" draggable="true">Drag Me</p>
-            <p id="finish"></p>
+        <ul id="list">
+            <li class="list-item" draggable="true">Item 1</li>
+            <li class="list-item" draggable="true">Item 2</li>
+            <li class="list-item" draggable="true">Item 3</li>
         </ul>
         <div id="text-container">
-            <input type="text" placeholder="Enter Item to Add"/>
+            <input type="text" id="new-value" placeholder="Enter Item to Add"/>
         </div>
     </div>
+    <script src="Example JS.js"></script>
 </body>
 </html>

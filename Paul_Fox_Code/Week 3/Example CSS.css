@@ -8,7 +8,7 @@ div.container {
 
 }
 
-.list {
+#list {
 
     text-align: center;
     margin: 30px;
@@ -33,6 +33,21 @@ ul li:hover {
 ul li.selected {
 
     background-color: rgb(229, 131, 233);
+
+}
+
+@keyframes delete {
+
+    to{left: 0px;}
+
+}
+
+.deleting {
+
+    animation-name: delete;
+    background-color: rgb(229, 131, 233);
+    position: relative;
+    animation-duration: 2s;
 
 }
 
