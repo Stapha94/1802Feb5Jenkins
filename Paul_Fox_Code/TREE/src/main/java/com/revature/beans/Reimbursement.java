@@ -12,8 +12,11 @@ public class Reimbursement {
 
     public Reimbursement(){}
 
-    public Reimbursement(int reimbursementId, int employeeId) {
+    public Reimbursement(int reimbursementId, float reimbursementTotal, float reimbursementUsed, float reimbursementRemainder, int employeeId) {
         this.reimbursementId = reimbursementId;
+        this.reimbursementTotal = reimbursementTotal;
+        this.reimbursementUsed = reimbursementUsed;
+        this.reimbursementRemainder = reimbursementRemainder;
         this.employeeId = employeeId;
     }
 

@@ -43,17 +43,11 @@ public class FormDaoJdbcPg implements FormDao {
                 String missedTime = rs.getString("missed_time");
                 String attachments = rs.getString("attachments");
                 String approvalMsg = rs.getString("approval_msg");
+                boolean approvedBySupervisor = rs.getBoolean("approved_by_supervisor");
+                boolean approvedByDeptHead = rs.getBoolean("approved_by_dept_head");
+                boolean approvedByBenco = rs.getBoolean("approved_by_benco");
                 float projectedReimbursement = rs.getFloat("projected_reimbursement");
-                Form myForm = new Form(formId, date, time, location, description, cost, eventType, gradingFormat, employeeId);
-
-                if(missedTime != null)
-                    myForm.setMissedTime(missedTime);
-                else if(attachments != null)
-                    myForm.setAttachments(attachments);
-                else if(approvalMsg != null)
-                    myForm.setApprovalMsg(approvalMsg);
-                else if(projectedReimbursement != 0.00f)
-                    myForm.setProjectedReimbursement(projectedReimbursement);
+                Form myForm = new Form(formId, date, time, location, description, cost, eventType, gradingFormat, missedTime, attachments, approvalMsg, approvedBySupervisor, approvedByDeptHead, approvedByBenco, projectedReimbursement, employeeId);
 
                 return myForm;
             }
@@ -69,6 +63,50 @@ public class FormDaoJdbcPg implements FormDao {
 
     }
 
+    public Form getByEmployeeId(int employeeId){
+
+        try(Connection conn = connectionUtil.getConnection()){
+
+            PreparedStatement ps;
+            String query = "SELECT * FROM forms "
+                    + "JOIN employees ON forms.employee = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, employeeId);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+
+                int formId = rs.getInt("form_id");
+                String date = rs.getString("date");
+                String time = rs.getString("time");
+                String location = rs.getString("location");
+                String description = rs.getString("description");
+                float cost = rs.getFloat("cost");
+                String eventType = rs.getString("event_type");
+                String gradingFormat = rs.getString("grading_format");
+                String missedTime = rs.getString("missed_time");
+                String attachments = rs.getString("attachments");
+                String approvalMsg = rs.getString("approval_msg");
+                boolean approvedBySupervisor = rs.getBoolean("approved_by_supervisor");
+                boolean approvedByDeptHead = rs.getBoolean("approved_by_dept_head");
+                boolean approvedByBenco = rs.getBoolean("approved_by_benco");
+                float projectedReimbursement = rs.getFloat("projected_reimbursement");
+                Form myForm = new Form(formId, date, time, location, description, cost, eventType, gradingFormat, missedTime, attachments, approvalMsg, approvedBySupervisor, approvedByDeptHead, approvedByBenco, projectedReimbursement, employeeId);
+
+                return myForm;
+
+            }
+            return null;
+
+        } catch (SQLException e){
+
+            System.out.println("Could not find Form by Employee ID");
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
     /**
      * Creates a new Form in the database and sets the object form's ID variable.
      * @param form The Form to create in the Database.
@@ -79,8 +117,8 @@ public class FormDaoJdbcPg implements FormDao {
         try(Connection conn = connectionUtil.getConnection()){
 
             PreparedStatement ps;
-            String query = "INSERT INTO forms (date, time, location, description, cost, event_type, grading_format, missed_time, attachments, approval_msg, projected_reimbursement, employee) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING form_id;";
+            String query = "INSERT INTO forms (date, time, location, description, cost, event_type, grading_format, missed_time, attachments, approval_msg, approved_by_supervisoe, approved_by_dept_head, approved_by_benco, projected_reimbursement, employee) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ?) RETURNING form_id;";
             ps = conn.prepareStatement(query);
             ps.setString(1, form.getDate());
             ps.setString(2, form.getTime());
@@ -92,8 +130,11 @@ public class FormDaoJdbcPg implements FormDao {
             ps.setString(8, form.getMissedTime());
             ps.setString(9, form.getAttachments());
             ps.setString(10, form.getApprovalMsg());
-            ps.setFloat(11, form.getProjectedReimbursement());
-            ps.setInt(12, form.getEmployeeId());
+            ps.setBoolean(11, form.isApprovedBySupervisor());
+            ps.setBoolean(12, form.isApprovedByDeptHead());
+            ps.setBoolean(13, form.isApprovedByBenco());
+            ps.setFloat(14, form.getProjectedReimbursement());
+            ps.setInt(15, form.getEmployeeId());
             ResultSet rs = ps.executeQuery();
 
             ps.close();
@@ -120,7 +161,7 @@ public class FormDaoJdbcPg implements FormDao {
         try(Connection conn = connectionUtil.getConnection()){
 
             PreparedStatement ps;
-            String query = "UPDATE forms SET date = ?, time = ?, location = ?, description = ?, cost = ?, event_type = ?, grading_format = ?, missed_time = ?, attachments = ? approval_msg = ?, projected_reimbursement = ? WHERE employee = ?;";
+            String query = "UPDATE forms SET date = ?, time = ?, location = ?, description = ?, cost = ?, event_type = ?, grading_format = ?, missed_time = ?, attachments = ? approval_msg = ?, approved_by_supervisor = ?, approved_by_dept_head = ?, approved_by_benco = ?, projected_reimbursement = ? WHERE employee = ?;";
             ps = conn.prepareStatement(query);
             ps.setString(1, form.getDate());
             ps.setString(2, form.getTime());
@@ -132,8 +173,11 @@ public class FormDaoJdbcPg implements FormDao {
             ps.setString(8, form.getMissedTime());
             ps.setString(9, form.getAttachments());
             ps.setString(10, form.getApprovalMsg());
-            ps.setFloat(11, form.getProjectedReimbursement());
-            ps.setInt(12, form.getEmployeeId());
+            ps.setBoolean(11, form.isApprovedBySupervisor());
+            ps.setBoolean(12, form.isApprovedByDeptHead());
+            ps.setBoolean(13, form.isApprovedByBenco());
+            ps.setFloat(14, form.getProjectedReimbursement());
+            ps.setInt(15, form.getEmployeeId());
 
             ps.execute();
 

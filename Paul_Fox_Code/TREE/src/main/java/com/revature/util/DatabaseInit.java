@@ -19,16 +19,16 @@ public class DatabaseInit {
                     + "first_name VARCHAR(40), "
                     + "last_name VARCHAR(40), "
                     + "ssn VARCHAR(11), "
-                    + "emsil VARCHAR(100), "
+                    + "email VARCHAR(100), "
                     + "hash VARCHAR(40), "
-                    + "supervisor INTEGER REFERENCES employees(employee_id));";
+                    + "supervisor INTEGER REFERENCES employees(employee_id) ON DELETE SET NULL);";
             ps = conn.prepareStatement(query);
             ps.execute();
 
             query = "CREATE TABLE IF NOT EXISTS departments( "
-                    + "department_id SERIAL PRIMARY KEY ON DELETE SET NULL, "
+                    + "department_id SERIAL PRIMARY KEY, "
                     + "department_name VARCHAR(40), "
-                    + "department_head INTEGER REFERENCES employees(employee_id));";
+                    + "department_head INTEGER REFERENCES employees(employee_id) ON DELETE SET NULL);";
             ps = conn.prepareStatement(query);
             ps.execute();
 
@@ -37,12 +37,12 @@ public class DatabaseInit {
                     + "reimbursement_total FLOAT, "
                     + "reimbursement_used FLOAT, "
                     + "reimbursement_remainder FLOAT, "
-                    + "employee INTEGER REFERENCES employees(employee_id));";
+                    + "employee INTEGER REFERENCES employees(employee_id) ON DELETE CASCADE);";
             ps = conn.prepareStatement(query);
             ps.execute();
 
             query = "CREATE TABLE IF NOT EXISTS forms( "
-                    + "form_id SERIAL PRIMARY KEY ON DELETE CASCADE, "
+                    + "form_id SERIAL PRIMARY KEY, "
                     + "date VARCHAR(30), "
                     + "time VARCHAR(50), "
                     + "location VARCHAR(100), "
@@ -54,19 +54,22 @@ public class DatabaseInit {
                     + "attachments VARCHAR(255), "
                     + "approval_msg VARCHAR(255), "
                     + "projected_reimbursement FLOAT, "
-                    + "employee INTEGER REFERENCES employees(employee_id));";
+                    + "approved_by_supervisor BOOLEAN DEFAULT FALSE, "
+                    + "approved_by_dept_head BOOLEAN DEFAULT FALSE, "
+                    + "approved_by_benco BOOLEAN DEFAULT FALSE, "
+                    + "employee INTEGER REFERENCES employees(employee_id) ON DELETE CASCADE);";
             ps = conn.prepareStatement(query);
             ps.execute();
 
             query = "CREATE TABLE IF NOT EXISTS results( "
                     + "result_id SERIAL PRIMARY KEY, "
-                    + "form INTEGER REFERENCES forms(form_id), "
+                    + "form INTEGER REFERENCES forms(form_id) ON DELETE CASCADE, "
                     + "grade FLOAT);";
             ps = conn.prepareStatement(query);
             ps.execute();
 
             query = "ALTER TABLE employees "
-                    + "ADD department INTEGER REFERENCES departments(department_id);";
+                    + "ADD department INTEGER REFERENCES departments(department_id) ON DELETE SET NULL;";
             ps = conn.prepareStatement(query);
             ps.execute();
 

@@ -15,12 +15,15 @@ public class Form {
     private String missedTime;
     private String attachments;
     private String approvalMsg;
+    private boolean approvedBySupervisor;
+    private boolean approvedByDeptHead;
+    private boolean approvedByBenco;
     private float projectedReimbursement;
     private int employeeId;
 
     public Form(){}
 
-    public Form(int formId, String date, String time, String location, String description, float cost, String eventType, String gradingFormat, int employeeId) {
+    public Form(int formId, String date, String time, String location, String description, float cost, String eventType, String gradingFormat, String missedTime, String attachments, String approvalMsg, boolean approvedBySupervisor, boolean approvedByDeptHead, boolean approvedByBenco, float projectedReimbursement, int employeeId) {
         this.formId = formId;
         this.date = date;
         this.time = time;
@@ -29,6 +32,13 @@ public class Form {
         this.cost = cost;
         this.eventType = eventType;
         this.gradingFormat = gradingFormat;
+        this.missedTime = missedTime;
+        this.attachments = attachments;
+        this.approvalMsg = approvalMsg;
+        this.approvedBySupervisor = approvedBySupervisor;
+        this.approvedByDeptHead = approvedByDeptHead;
+        this.approvedByBenco = approvedByBenco;
+        this.projectedReimbursement = projectedReimbursement;
         this.employeeId = employeeId;
     }
 
@@ -120,6 +130,30 @@ public class Form {
         this.approvalMsg = approvalMsg;
     }
 
+    public boolean isApprovedBySupervisor() {
+        return approvedBySupervisor;
+    }
+
+    public void setApprovedBySupervisor(boolean approvedBySupervisor) {
+        this.approvedBySupervisor = approvedBySupervisor;
+    }
+
+    public boolean isApprovedByDeptHead() {
+        return approvedByDeptHead;
+    }
+
+    public void setApprovedByDeptHead(boolean approvedByDeptHead) {
+        this.approvedByDeptHead = approvedByDeptHead;
+    }
+
+    public boolean isApprovedByBenco() {
+        return approvedByBenco;
+    }
+
+    public void setApprovedByBenco(boolean approvedByBenco) {
+        this.approvedByBenco = approvedByBenco;
+    }
+
     public float getProjectedReimbursement() {
         return projectedReimbursement;
     }
@@ -143,6 +177,9 @@ public class Form {
         Form form = (Form) o;
         return getFormId() == form.getFormId() &&
                 Float.compare(form.getCost(), getCost()) == 0 &&
+                isApprovedBySupervisor() == form.isApprovedBySupervisor() &&
+                isApprovedByDeptHead() == form.isApprovedByDeptHead() &&
+                isApprovedByBenco() == form.isApprovedByBenco() &&
                 Float.compare(form.getProjectedReimbursement(), getProjectedReimbursement()) == 0 &&
                 getEmployeeId() == form.getEmployeeId() &&
                 Objects.equals(getDate(), form.getDate()) &&
@@ -159,7 +196,7 @@ public class Form {
     @Override
     public int hashCode() {
 
-        return Objects.hash(getFormId(), getDate(), getTime(), getLocation(), getDescription(), getCost(), getEventType(), getGradingFormat(), getMissedTime(), getAttachments(), getApprovalMsg(), getProjectedReimbursement(), getEmployeeId());
+        return Objects.hash(getFormId(), getDate(), getTime(), getLocation(), getDescription(), getCost(), getEventType(), getGradingFormat(), getMissedTime(), getAttachments(), getApprovalMsg(), isApprovedBySupervisor(), isApprovedByDeptHead(), isApprovedByBenco(), getProjectedReimbursement(), getEmployeeId());
     }
 
     @Override
@@ -176,6 +213,9 @@ public class Form {
                 ", missedTime='" + missedTime + '\'' +
                 ", attachments='" + attachments + '\'' +
                 ", approvalMsg='" + approvalMsg + '\'' +
+                ", approvedBySupervior=" + approvedBySupervisor +
+                ", approvedByDeptHead=" + approvedByDeptHead +
+                ", approvedByBenco=" + approvedByBenco +
                 ", projectedReimbursement=" + projectedReimbursement +
                 ", employeeId=" + employeeId +
                 '}';
