@@ -9,6 +9,7 @@ import java.util.List;
 public class EmployeeService {
 
     private static EmployeeDaoJdbcPg myEmployeeDao = new EmployeeDaoJdbcPg();
+    private static FormService myFormService = new FormService();
 
     public Employee getById(int employeeId){
 
@@ -59,6 +60,13 @@ public class EmployeeService {
 
         String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
         return hashed;
+
+    }
+
+    public boolean isSupervisor(int employeeId){
+
+        Employee employee = myEmployeeDao.getById(employeeId);
+
 
     }
 
