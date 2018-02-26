@@ -12,6 +12,8 @@ public interface EmployeeDao {
 
     Employee getByEmail(String email);
 
+    Employee getSupervisor(Employee employee);
+
     void newEmployee(Employee employee);
 
     void updateEmployee(Employee employee);

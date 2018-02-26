@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import com.revature.beans.Department;
+import com.revature.beans.Employee;
 import com.revature.util.ConnectionUtil;
 
 import java.sql.Connection;
@@ -55,11 +56,11 @@ public class DepartmentDaoJdbcPg implements DepartmentDao {
 
     /**
      * Returns a list of departments found by searching the database for the department name.
-     * @param department The name of the department to search for.
+     * @param departmentName The name of the department to search for.
      * @return Returns a list of departments that were found by searching for a name or null if nothing was found or an error was returned.
      */
     @Override
-    public List<Department> getByName(Department department) {
+    public List<Department> getByName(String departmentName) {
 
         List<Department> departmentList = new ArrayList<>();
 
@@ -68,14 +69,13 @@ public class DepartmentDaoJdbcPg implements DepartmentDao {
             PreparedStatement ps;
             String query = "SELECT * FROM departments WHERE department_name = ?;";
             ps = conn.prepareStatement(query);
-            ps.setString(1, department.getName());
+            ps.setString(1, departmentName);
             ResultSet rs = ps.executeQuery();
 
             ps.close();
 
             while(rs.next()){
 
-                String departmentName = rs.getString("department_name");
                 int departmentHead = rs.getInt("deapartment_head");
                 int departmentId = rs.getInt("department_id");
 
@@ -123,6 +123,43 @@ public class DepartmentDaoJdbcPg implements DepartmentDao {
 
             System.out.println("Failed to create new Department");
             e.printStackTrace();
+
+        }
+
+    }
+
+    @Override
+    public Employee getDeptHead(Department department){
+
+        try(Connection conn = connectionUtil.getConnection()){
+
+            PreparedStatement ps;
+            String query = "SELECT * FROM employees "
+                    + "JOIN departments ON employees.employee_id = ?;";
+
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, department.getDepartmentHead());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+
+                String fName = rs.getString("first_name");
+                String lName = rs.getString("last_name");
+                String SSN = rs.getString("ssn");
+                String hash = rs.getString("hash");
+                String email = rs.getString("email");
+                int departmentId = rs.getInt("department");
+                int supervisorId = rs.getInt("supervisor");
+
+                return new Employee(fName, lName, SSN, email, hash, department.getDepartmentHead(), departmentId, supervisorId);
+
+            }
+            return null;
+
+        } catch (SQLException e){
+
+            System.out.println("Could not find Department Head");
+            e.printStackTrace();
+            return null;
 
         }
 

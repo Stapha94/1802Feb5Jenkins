@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import com.revature.beans.Employee;
+import com.revature.beans.Result;
 import com.revature.util.ConnectionUtil;
 
 import java.sql.Connection;
@@ -139,6 +140,42 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
         } catch (SQLException e){
 
             System.out.println("Failed to get Employee by Email");
+            e.printStackTrace();
+            return null;
+
+        }
+
+    }
+
+    @Override
+    public Employee getSupervisor(Employee employee){
+
+        try(Connection conn = connectionUtil.getConnection()){
+
+            PreparedStatement ps;
+            String query = "SELECT * FROM employees "
+                    + "JOIN employees ON employees.employeeId = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, employee.getSupervisorId());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String SSN = rs.getString("ssn");
+                String hash = rs.getString("hash");
+                String email = rs.getString("email");
+                int departmentId = rs.getInt("department");
+                int supervisorId = rs.getInt("supervisor");
+                int employeeId = rs.getInt("employee_id");
+                return new Employee(firstName, lastName, SSN, email, hash, employeeId, departmentId, employee.getSupervisorId());
+
+            }
+            return null;
+
+        } catch (SQLException e){
+
+            System.out.println("Could not find Supervisor");
             e.printStackTrace();
             return null;
 

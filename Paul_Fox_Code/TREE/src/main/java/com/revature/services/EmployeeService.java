@@ -63,10 +63,9 @@ public class EmployeeService {
 
     }
 
-    public boolean isSupervisor(int employeeId){
+    public Employee getSupervisor(Employee employee){
 
-        Employee employee = myEmployeeDao.getById(employeeId);
-
+        return myEmployeeDao.getSupervisor(employee);
 
     }
 
