@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<controllers>
+    <controller class="com.ex.controllers.Demo" path="/demo">
+        <handler method="GET">
+            <handle>handleGet</handle>
+        </handler>
+        <handler method="POST">
+            <handle>handlePost</handle>
+        </handler>
+    </controller>
+    <controller class="com.ex.controllers.Login" path="/login">
+        <handler method="GET">
+            <handle>doGet</handle>
+        </handler>
+    </controller>
+    <controller class="com.ex.controllers.JSONController" path="/json">
+        <handler method="GET">
+            <handle>getBook</handle>
+        </handler>
+        <handler method="POST">
+            <handle>addBook</handle>
+        </handler>
+    </controller>
+    <controller class="com.ex.controllers.AuthorizationController" path="/authorize">
+        <handler method="POST" path="/token">
+            <handle>authorize</handle>
+        </handler>
+        <handler method="POST" path="/refresh">
+            <handle>refreshToken</handle>
+        </handler>
+    </controller>
+</controllers>

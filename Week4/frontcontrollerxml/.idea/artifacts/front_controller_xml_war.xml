@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="front-controller-xml:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="front-controller-xml.war">
+      <element id="artifact" artifact-name="front-controller-xml:war exploded" />
+    </root>
+  </artifact>
+</component>

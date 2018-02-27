@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AJAX</title>
+</head>
+
+<body>
+<div id="container"></div>
+<button id="getAjax">Get Ajax</button>
+<script>
+    var container = document.querySelector("#container");
+    var button = document.querySelector("#getAjax");
+    button.addEventListener("click", function () {
+        var ajax = new XMLHttpRequest();
+        ajax.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                container.innerHTML = this.responseText;
+            }
+        }
+
+        ajax.open("GET", "http://localhost:8085/fc/srv/demo", true);
+        ajax.send();
+    })
+</script>
+</body>
+
+</html>
