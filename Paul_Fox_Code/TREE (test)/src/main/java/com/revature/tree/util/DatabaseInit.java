@@ -20,7 +20,7 @@ public class DatabaseInit {
                     + "last_name VARCHAR(40), "
                     + "ssn VARCHAR(11), "
                     + "email VARCHAR(100), "
-                    + "hash VARCHAR(40), "
+                    + "hash VARCHAR(60), "
                     + "supervisor INTEGER REFERENCES employees(employee_id) ON DELETE SET NULL);";
             ps = conn.prepareStatement(query);
             ps.execute();

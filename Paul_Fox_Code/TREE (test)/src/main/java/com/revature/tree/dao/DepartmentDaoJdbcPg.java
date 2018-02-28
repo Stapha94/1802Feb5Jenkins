@@ -31,7 +31,7 @@ public class DepartmentDaoJdbcPg implements DepartmentDao {
             ps.setInt(1, departmentId);
             ResultSet rs = ps.executeQuery();
 
-            ps.close();
+            //ps.close();
 
             if(rs.next()){
 

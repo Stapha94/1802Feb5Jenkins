@@ -101,8 +101,7 @@ public class Employee {
                 Objects.equals(getFirstName(), employee.getFirstName()) &&
                 Objects.equals(getLastName(), employee.getLastName()) &&
                 Objects.equals(getSSN(), employee.getSSN()) &&
-                Objects.equals(getEmail(), employee.getEmail()) &&
-                Objects.equals(getPassword(), employee.getPassword());
+                Objects.equals(getEmail(), employee.getEmail());
     }
 
     @Override

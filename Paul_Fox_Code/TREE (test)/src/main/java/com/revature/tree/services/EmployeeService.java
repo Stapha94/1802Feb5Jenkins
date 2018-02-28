@@ -45,13 +45,7 @@ public class EmployeeService {
 
         Employee myComparedEmployee = employee;
         Employee databaseEmployee = myEmployeeDao.getByEmail(employee.getEmail());
-        if(myComparedEmployee.getPassword().equals(databaseEmployee.getPassword())){
-
-            return true;
-
-        }
-        else
-            return false;
+        return BCrypt.checkpw(myComparedEmployee.getPassword(), databaseEmployee.getPassword());
 
     }
 

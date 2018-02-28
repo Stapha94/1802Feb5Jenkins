@@ -1,7 +1,6 @@
 package com.revature.tree.dao;
 
 import com.revature.tree.beans.Employee;
-import com.revature.tree.beans.Result;
 import com.revature.tree.util.ConnectionUtil;
 
 import java.sql.Connection;
@@ -31,7 +30,7 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
             ps.setInt(1, employeeId);
             ResultSet rs = ps.executeQuery();
 
-            ps.close();
+            //ps.close();
 
             if(rs.next()){
 
@@ -78,7 +77,7 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
             ps.setString(2, lastName);
             ResultSet rs = ps.executeQuery();
 
-            ps.close();
+            //ps.close();
 
             while(rs.next()){
 
@@ -121,7 +120,7 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
 
-            ps.close();
+            //ps.close();
 
             if(rs.next()){
 
@@ -154,7 +153,7 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
 
             PreparedStatement ps;
             String query = "SELECT * FROM employees "
-                    + "JOIN employees ON employees.employeeId = ?";
+                    + "WHERE employees.employee_id = ?";
             ps = conn.prepareStatement(query);
             ps.setInt(1, employee.getSupervisorId());
             ResultSet rs = ps.executeQuery();
@@ -204,7 +203,7 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
             ps.setInt(7, employee.getSupervisorId());
             ResultSet rs = ps.executeQuery();
 
-            ps.close();
+            //ps.close();
 
             if(rs.next()){
 
@@ -241,7 +240,9 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
             ps.setInt(7, employee.getSupervisorId());
             ps.setInt(8, employee.getEmployeeId());
 
-            ps.close();
+            ps.execute();
+
+            //ps.close();
 
 
         } catch (SQLException e){
@@ -291,7 +292,7 @@ public class EmployeeDaoJdbcPg implements EmployeeDao{
             ps.setInt(1, employee.getEmployeeId());
             ps.execute();
 
-            ps.close();
+            //ps.close();
 
             conn.commit();
 
