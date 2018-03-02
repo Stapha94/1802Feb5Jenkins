@@ -1,0 +1,63 @@
+:host {
+
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+
+}
+
+div.input {
+
+    position: relative;
+
+}
+
+div.input label {
+
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    left: 10px;
+    background: white;
+    padding: 5px 2px;
+
+}
+
+div.input input {
+
+    padding: 10px 20px;
+    font-size: 30px;
+    outline: 0;
+
+}
+
+.ng-valid[required], .ng-valid.required {
+
+    border-left: 5px solid #42A948;
+
+}
+
+.ng-invalid:not(form) {
+
+    border-left: 5px solid #a94442;
+
+}
+
+div.input .submit {
+
+    float: right;
+    display: block;
+    padding: 10px 20px;
+    margin-right: 0px;
+    font-size: 30px;
+    clear: left;
+
+}
+
+div.input {
+
+    margin-top: 20px;
+
+}

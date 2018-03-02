@@ -1,0 +1,18 @@
+<form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+  <div class="input">
+    <label>Email</label>
+    <input required type="text" placeholder="email" name="email" id="email" [(ngModel)]="email">
+    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Name is Required!</div>
+  </div>
+  <div class="input">
+    <label>Password</label>
+    <input required type="password" name="password" id="password" [(ngModel)]="password">
+  </div>
+  <div class="input">
+    <button class= "submit" type="submit" value="login" [disabled]="!loginForm.form.valid">Login</button>
+  </div>
+  <div class="input">
+    <!-- TODO DELETE THIS --><h1>{{email}}</h1>
+    <!-- TODO DELETE THIS --><h1>{{password}}</h1>
+  </div>
+</form>
