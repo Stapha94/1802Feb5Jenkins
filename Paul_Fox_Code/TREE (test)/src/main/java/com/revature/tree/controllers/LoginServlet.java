@@ -18,15 +18,15 @@ public class LoginServlet extends HttpServlet {
     private static EmployeeService myEmployeeService = new EmployeeService();
     private static Gson gson = new Gson();
 
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Servicing the request");
-        super.service(req, resp);
-//        PrintWriter out = resp.getWriter();
-//        out.write("Hello, from my first servlet");
-//        resp.setStatus(200);
-//        resp.setHeader("Content-Type", "text/plain");
-    }
+//    @Override
+//    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        System.out.println("Servicing the request");
+//        super.service(req, resp);
+////        PrintWriter out = resp.getWriter();
+////        out.write("Hello, from my first servlet");
+////        resp.setStatus(200);
+////        resp.setHeader("Content-Type", "text/plain");
+//    }
 
     @Override
     public void destroy() {
@@ -43,6 +43,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        System.out.println("Processing the POST");
         PrintWriter out = resp.getWriter();
 
         String email = req.getParameter("email");

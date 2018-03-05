@@ -35,12 +35,13 @@
       <version>0.4</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+    <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
     <dependency>
-      <groupId>org.postgresql</groupId>
+      <groupId>postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <version>42.2.1</version>
+      <version>9.1-901-1.jdbc4</version>
     </dependency>
+
 
     <!-- https://mvnrepository.com/artifact/org.meanbean/meanbean -->
     <dependency>

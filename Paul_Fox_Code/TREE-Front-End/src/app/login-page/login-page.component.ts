@@ -33,6 +33,8 @@ export class LoginPageComponent implements OnInit {
     //   alert("Incorrect Email or Password");
     // }
 
+    console.log(this.user.email);
+    console.log(this.user.password);
     this.http.post('http://localhost:8080/tree/login-info', {
       email: this.user.email,
       password: this.user.password
