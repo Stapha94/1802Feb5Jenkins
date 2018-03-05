@@ -23,6 +23,21 @@ public class EmployeeService {
 
     }
 
+    public Boolean employeeExists(String email){
+
+        if(myEmployeeDao.getByEmail(email) != null)
+            return true;
+        else
+            return false;
+
+    }
+
+    public Employee getByEmail(String email){
+
+        return myEmployeeDao.getByEmail(email);
+
+    }
+
     public void newEmployee(Employee employee){
 
         myEmployeeDao.newEmployee(employee);
@@ -46,6 +61,12 @@ public class EmployeeService {
         Employee myComparedEmployee = employee;
         Employee databaseEmployee = myEmployeeDao.getByEmail(employee.getEmail());
         return BCrypt.checkpw(myComparedEmployee.getPassword(), databaseEmployee.getPassword());
+
+    }
+
+    public boolean compareHash(String password, Employee employee){
+
+        return BCrypt.checkpw(password, employee.getPassword());
 
     }
 

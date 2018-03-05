@@ -2,6 +2,7 @@ package com.revature.tree.util;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -28,7 +29,10 @@ public class ConnectionUtil {
         try{
 
             Properties myProperties = new Properties();
-            myProperties.load(new FileReader("src/main/resources/jdbc.txt"));
+            //myProperties.load(new FileReader("src/main/resources/jdbc.txt"));
+            InputStream in = this.getClass().getClassLoader().getResourceAsStream("jdbc.txt");
+            if(in != null)
+                myProperties.load(in);
             return DriverManager.getConnection(myProperties.getProperty("url"), myProperties.getProperty("user"), myProperties.getProperty("password"));
 
         } catch (SQLException e){
