@@ -1,0 +1,42 @@
+ul {
+    list-style: none;
+ }
+ 
+ .list-container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    width: 50%;
+    margin: 0 auto;
+ }
+ 
+ li {
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    min-width: 50%;
+    height: 2em;
+    padding: 15px;
+    font-size: 1.2em;
+ }
+ 
+ li:hover {
+    background-color: #aaa;
+    position: relative;
+    left: 5px;
+ }
+ 
+ label {
+    margin: 20px;
+ }
+ 
+ span {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: green;
+    width: 1em;
+    text-align: center;
+    float: right;
+    margin-right: 2px;
+ }

@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="TREE (test):war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="Tuition Reimbursement Electronic Evaluator (TREE).war">
-      <element id="artifact" artifact-name="TREE (test):war exploded" />
-    </root>
-  </artifact>
-</component>

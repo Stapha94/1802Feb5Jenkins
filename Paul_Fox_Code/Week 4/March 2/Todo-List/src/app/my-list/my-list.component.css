@@ -1,0 +1,42 @@
+ul {
+
+    list-style: none;
+
+}
+
+.list-container {
+
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    width: 50%;
+    margin: 0 auto;
+
+}
+
+.list-item {
+
+    border: 1px solid #ccc;
+    background-color: lavender;
+    width: 90%;
+    text-align: center;
+    padding: 15px;
+    margin: 0 0 2px 0;
+
+}
+
+.list-item:hover, .list-item.selected {
+
+    position: relative;
+    left: 5px;
+    background-color: lavenderblush;
+
+}
+
+#toolbar {
+
+    display: flex;
+    flex-direction: row-reverse;
+
+}

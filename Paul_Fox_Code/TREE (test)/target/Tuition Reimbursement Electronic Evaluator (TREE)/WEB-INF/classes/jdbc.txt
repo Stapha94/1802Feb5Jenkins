@@ -1,3 +1,0 @@
-url=jdbc:postgresql://revdbtest.c9jywel4yll9.us-east-2.rds.amazonaws.com/tree_db
-user=Stapha94
-password=94Shepard19
