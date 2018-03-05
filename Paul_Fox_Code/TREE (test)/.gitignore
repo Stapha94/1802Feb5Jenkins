@@ -1,5 +1,0 @@
-/out/
-*.idea/
-/target/
-/src/main/resources/jdbc.txt
-*.iml
