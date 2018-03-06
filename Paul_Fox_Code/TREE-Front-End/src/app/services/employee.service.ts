@@ -6,7 +6,7 @@ export class EmployeeService {
 
   constructor() { }
 
-  employee: Employee;
+  employee: Employee = new Employee("","","");
 
   isLoggedIn: boolean = false;
 
