@@ -12,6 +12,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserServiceService } from './services/user-service.service';
+import { AuthGuard } from './guards/auth.guard';
+import { EmployeeService } from './services/employee.service';
 
 
 const appRoutes:Routes = [
@@ -22,6 +24,7 @@ const appRoutes:Routes = [
 
   {
     path: 'dashboard',
+    canActivate: [AuthGuard],
     component: DashboardComponent
   }
 ]
@@ -40,7 +43,7 @@ const appRoutes:Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserServiceService],
+  providers: [UserServiceService, AuthGuard, EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
