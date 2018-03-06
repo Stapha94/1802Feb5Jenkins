@@ -35,17 +35,26 @@ export class LoginPageComponent implements OnInit {
     }).subscribe(
       data => {
       let a = JSON.parse(JSON.stringify(data));
-      this.employeeService.employee.firstName = a.firstName;
-      this.employeeService.employee.lastName = a.lastName;
-      this.employeeService.employee.email = a.email;
-      if(this.employeeService.employee.email != null){
-        this.employeeService.logIn();
-      }
-      if(this.employeeService.isLoggedIn){
-        this.router.navigate(['dashboard']);
+      if(a != null){
+        this.employeeService.employee.firstName = a.firstName;
+        this.employeeService.employee.lastName = a.lastName;
+        this.employeeService.employee.email = a.email;
+        if(this.employeeService.employee.email != null){
+          this.employeeService.logIn();
+        }
+        if(this.employeeService.isLoggedIn){
+          this.router.navigate(['dashboard']);
+        }
+        else{
+          alert("Incorrect Email or Password");
+          this.user.email = null;
+          this.user.password = null;
+        }
       }
       else{
         alert("Incorrect Email or Password");
+        this.user.email = null;
+        this.user.password = null;
       }
     });
     

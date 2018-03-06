@@ -73,6 +73,22 @@ public class EmployeeServiceTest {
     }
 
     @Test
+    void test(){
+
+        Employee testEmployee = new Employee();
+        myEmployee.setFirstName("Test");
+        myEmployee.setLastName("Testerson");
+        myEmployee.setSSN("987-65-4321");
+        myEmployee.setEmail("test@test.com");
+        myEmployee.setPassword(employeeService.hashPassword("password"));
+        myEmployee.setSupervisorId(1);
+        myEmployee.setDepartmentId(1);
+        employeeService.newEmployee(myEmployee);
+
+
+    }
+
+    @Test
     void testUpdateEmployee(){
 
         myEmployee = employeeService.getById(3);

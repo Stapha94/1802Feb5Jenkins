@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -14,26 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserServiceService } from './services/user-service.service';
 import { AuthGuard } from './guards/auth.guard';
 import { EmployeeService } from './services/employee.service';
-
-
-const appRoutes:Routes = [
-  {
-    path: 'login',
-    component: LoginPageComponent
-  },
-
-  {
-    path: 'dashboard',
-    canActivate: [AuthGuard],
-    component: DashboardComponent
-  },
-
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
-  }
-]
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -45,9 +25,9 @@ const appRoutes:Routes = [
   imports: [
     BrowserModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [UserServiceService, AuthGuard, EmployeeService],
   bootstrap: [AppComponent]

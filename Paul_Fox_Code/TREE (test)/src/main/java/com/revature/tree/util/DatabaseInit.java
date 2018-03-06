@@ -18,8 +18,8 @@ public class DatabaseInit {
                     + "employee_id SERIAL PRIMARY KEY, "
                     + "first_name VARCHAR(40), "
                     + "last_name VARCHAR(40), "
-                    + "ssn VARCHAR(11), "
-                    + "email VARCHAR(100), "
+                    + "ssn VARCHAR(11) UNIQUE, "
+                    + "email VARCHAR(100) UNIQUE, "
                     + "hash VARCHAR(60), "
                     + "supervisor INTEGER REFERENCES employees(employee_id) ON DELETE SET NULL);";
             ps = conn.prepareStatement(query);
