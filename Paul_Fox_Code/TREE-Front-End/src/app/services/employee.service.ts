@@ -22,4 +22,10 @@ export class EmployeeService {
 
   }
 
+  getEmployee(): Employee {
+
+    return this.employee;
+
+  }
+
 }

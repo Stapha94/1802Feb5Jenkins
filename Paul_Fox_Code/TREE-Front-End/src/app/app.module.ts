@@ -14,13 +14,16 @@ import { UserServiceService } from './services/user-service.service';
 import { AuthGuard } from './guards/auth.guard';
 import { EmployeeService } from './services/employee.service';
 import { AppRoutingModule } from './/app-routing.module';
+import { FormComponent } from './form/form.component';
+import { FormService } from './services/form.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     HeaderComponent,
-    DashboardComponent
+    DashboardComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,7 @@ import { AppRoutingModule } from './/app-routing.module';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [UserServiceService, AuthGuard, EmployeeService],
+  providers: [UserServiceService, AuthGuard, EmployeeService, FormService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
