@@ -18,7 +18,7 @@ import { EmployeeService } from './services/employee.service';
 
 const appRoutes:Routes = [
   {
-    path: '',
+    path: 'login',
     component: LoginPageComponent
   },
 
@@ -26,6 +26,12 @@ const appRoutes:Routes = [
     path: 'dashboard',
     canActivate: [AuthGuard],
     component: DashboardComponent
+  },
+
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
   }
 ]
 
